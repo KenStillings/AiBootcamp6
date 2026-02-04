@@ -5,11 +5,21 @@
 **Status**: Draft  
 **Input**: User description: "Support for Overdue Todo Items - Users need a clear, visual way to identify which todos have not been completed by their due date"
 
+## Clarifications
+
+### Session 2026-02-04
+
+- Q: What type of visual indicator should be used for overdue todos? → A: Color + Icon (e.g., red background with warning icon ⚠️)
+- Q: Should the system track and store the completion timestamp for todos? → A: Only for overdue items - hybrid approach, stores timestamp only when needed
+- Q: How should the overdue status update when the date changes (e.g., at midnight)? → A: Update on next page refresh or user interaction
+- Q: Where should the overdue count summary be displayed? → A: At the top of the todo list
+- Q: How should "completed late" todos be visually indicated? → A: Muted/subtle color with completion checkmark
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Visual Overdue Indicator (Priority: P1)
 
-As a user viewing my todo list, I can immediately identify which todos are overdue through clear visual indicators (such as color highlighting, icons, or labels) so that I can quickly prioritize my work and address time-sensitive tasks first.
+As a user viewing my todo list, I can immediately identify which todos are overdue through a combination of color highlighting and an icon (such as a red background with a warning icon ⚠️) so that I can quickly prioritize my work and address time-sensitive tasks first, with accessibility for all users including those with color vision deficiencies.
 
 **Why this priority**: This is the core value of the feature - giving users instant visual feedback about overdue items without requiring manual date comparison. This is the minimum viable product that delivers immediate value.
 
@@ -27,7 +37,7 @@ As a user viewing my todo list, I can immediately identify which todos are overd
 
 ### User Story 2 - Overdue Status for Completed Todos (Priority: P2)
 
-As a user who has completed a todo after its due date, I want the system to clearly indicate that the todo was completed late so that I can track my completion performance and understand which tasks I finished past their deadline.
+As a user who has completed a todo after its due date, I want the system to indicate that the todo was completed late using a muted/subtle color with the completion checkmark so that I can track my completion performance and understand which tasks I finished past their deadline without the indicator being as prominent as active overdue items.
 
 **Why this priority**: This adds value for users who want to track their performance and understand their task completion patterns. It's independent of P1 but provides additional context.
 
@@ -43,7 +53,7 @@ As a user who has completed a todo after its due date, I want the system to clea
 
 ### User Story 3 - Overdue Count Summary (Priority: P3)
 
-As a user with multiple todos, I want to see a summary count of how many todos are currently overdue so that I can quickly understand the scope of my overdue tasks without scanning the entire list.
+As a user with multiple todos, I want to see a summary count of how many todos are currently overdue displayed at the top of my todo list so that I can quickly understand the scope of my overdue tasks without scanning the entire list.
 
 **Why this priority**: This is a nice-to-have enhancement that provides quick context about workload but is not essential for the core functionality. Users can still identify overdue items without this count.
 
@@ -59,30 +69,30 @@ As a user with multiple todos, I want to see a summary count of how many todos a
 
 ### Edge Cases
 
-- What happens when a todo becomes overdue while the user is viewing the list (date changes at midnight)?
-- How does the system handle todos with due dates set to dates many years in the past?
-- What happens when the user's system clock is incorrect?
-- How are overdue indicators displayed when printing or exporting the todo list?
-- What happens when a user changes a todo's due date from overdue to future?
+- When a todo becomes overdue while the user is viewing the list (date changes at midnight), the overdue status will update on the next page refresh or user interaction
+- Todos with due dates set to dates many years in the past are treated the same as todos overdue by one day (same visual indicator)
+- If the user's system clock is incorrect, overdue calculations will be based on the incorrect time; system assumes clock accuracy
+- Overdue indicators should be visible when printing or exporting the todo list (implementation-specific)
+- When a user changes a todo's due date from overdue to future, the overdue indicator is removed immediately upon save
 
 ## Requirements *(mandatory)*
 
 ### Functional Requirements
 
 - **FR-001**: System MUST compare each todo's due date against the current date to determine overdue status
-- **FR-002**: System MUST display a visual indicator (color, icon, or label) for todos that are overdue (due date is before today and todo is not completed)
-- **FR-003**: System MUST calculate overdue status in real-time based on the current date
+- **FR-002**: System MUST display a combined visual indicator (color highlighting with an icon) for todos that are overdue (due date is before today and todo is not completed)
+- **FR-003**: System MUST calculate overdue status based on the current date at the time of page load or user interaction (does not require real-time midnight updates)
 - **FR-004**: System MUST not mark completed todos as overdue in the primary visual indicator, regardless of their due date
 - **FR-005**: System MUST treat todos without a due date as never overdue
 - **FR-006**: System MUST treat todos with today's date as the due date as not yet overdue
 - **FR-007**: System MUST maintain overdue status calculation when todos are updated (title, due date, completion status changes)
-- **FR-008**: System MUST indicate when a completed todo was finished after its due date (completed late)
-- **FR-009**: System MUST display a count or summary of total overdue incomplete todos
-- **FR-010**: System MUST ensure overdue visual indicators are clearly distinguishable from other todo states (completed, current, future)
+- **FR-008**: System MUST store a completion timestamp when a todo is marked complete if it was overdue at the time of completion, and indicate when a completed todo was finished after its due date using a muted/subtle color with the completion checkmark (less prominent than active overdue indicators)
+- **FR-009**: System MUST display a count or summary of total overdue incomplete todos at the top of the todo list
+- **FR-010**: System MUST ensure overdue visual indicators combine color and iconography to be clearly distinguishable from other todo states (completed, current, future) and accessible to users with color vision deficiencies
 
 ### Key Entities
 
-- **Todo**: Existing entity with attributes including due date, completion status, and created date. Overdue status is derived from comparing due date to current date.
+- **Todo**: Existing entity with attributes including due date, completion status, and created date. Overdue status is derived from comparing due date to current date. Optionally includes completion timestamp (stored only when todo is completed while overdue).
 - **Current Date**: System date used as the baseline for calculating overdue status
 
 ## Success Criteria *(mandatory)*
