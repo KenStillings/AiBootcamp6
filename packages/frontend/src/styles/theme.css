@@ -19,6 +19,13 @@
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
 
+  /* Overdue Colors */
+  --overdue-bg: #ffe6e6;
+  --overdue-border: #c62828;
+  --overdue-text: #1a1a1a;
+  --completed-late-bg: #fff4e6;
+  --completed-late-text: #666666;
+
   /* Spacing */
   --space-xs: 8px;
   --space-sm: 16px;
@@ -50,4 +57,56 @@
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+
+  /* Overdue Colors (Dark Mode) */
+  --overdue-bg: #4a1a1a;
+  --overdue-border: #ef5350;
+  --overdue-text: #ffffff;
+  --completed-late-bg: #3a2a1a;
+  --completed-late-text: #b0b0b0;
+}
+
+/* Overdue Todo Styles */
+.todo-overdue {
+  background-color: var(--overdue-bg) !important;
+  border-left: 4px solid var(--overdue-border) !important;
+}
+
+.overdue-icon {
+  margin-right: 8px;
+  font-size: 1.2em;
+}
+
+/* Completed Late Styles */
+.todo-completed-late {
+  background-color: var(--completed-late-bg) !important;
+  opacity: 0.8;
+}
+
+.todo-completed-late .todo-title::after {
+  content: ' (completed late)';
+  color: var(--completed-late-text);
+  font-size: 0.85em;
+  font-style: italic;
+}
+
+/* Overdue Summary Styles */
+.overdue-summary {
+  background-color: var(--overdue-bg);
+  border: 2px solid var(--overdue-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm);
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+
+.overdue-count {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.overdue-count::before {
+  content: '⚠️ ';
+  margin-right: 8px;
 }

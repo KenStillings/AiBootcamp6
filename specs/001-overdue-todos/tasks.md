@@ -20,9 +20,9 @@
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Verify existing monorepo structure (packages/frontend and packages/backend)
-- [ ] T002 [P] Install/verify Jest and testing dependencies in both workspaces
-- [ ] T003 [P] Verify ESLint configuration is active in both packages
+- [X] T001 Verify existing monorepo structure (packages/frontend and packages/backend)
+- [X] T002 [P] Install/verify Jest and testing dependencies in both workspaces
+- [X] T003 [P] Verify ESLint configuration is active in both packages
 
 **Checkpoint**: Development environment ready
 
@@ -34,10 +34,10 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T004 Add `completedAt` column to database schema in packages/backend/src/app.js
-- [ ] T005 Update backend todoService.js to return completedAt field in all responses
-- [ ] T006 [P] Create date utilities module structure in packages/frontend/src/utils/dateUtils.js
-- [ ] T007 [P] Add base CSS variables for overdue colors in packages/frontend/src/styles/theme.css
+- [X] T004 Add `completedAt` column to database schema in packages/backend/src/app.js
+- [X] T005 Update backend todoService.js to return completedAt field in all responses
+- [X] T006 [P] Create date utilities module structure in packages/frontend/src/utils/dateUtils.js
+- [X] T007 [P] Add base CSS variables for overdue colors in packages/frontend/src/styles/theme.css
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -53,15 +53,15 @@
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T008 [P] [US1] Write unit tests for isOverdue function in packages/frontend/src/utils/__tests__/dateUtils.test.js
-- [ ] T009 [P] [US1] Write component tests for TodoCard overdue class in packages/frontend/src/components/__tests__/TodoCard.test.js
+- [X] T008 [P] [US1] Write unit tests for isOverdue function in packages/frontend/src/utils/__tests__/dateUtils.test.js
+- [X] T009 [P] [US1] Write component tests for TodoCard overdue class in packages/frontend/src/components/__tests__/TodoCard.test.js
 
 ### Implementation for User Story 1
 
-- [ ] T010 [US1] Implement isOverdue utility function in packages/frontend/src/utils/dateUtils.js
-- [ ] T011 [US1] Add CSS styles for .todo-overdue class in packages/frontend/src/styles/theme.css
-- [ ] T012 [US1] Update TodoCard component to apply overdue class in packages/frontend/src/components/TodoCard.js
-- [ ] T013 [US1] Run tests and verify all User Story 1 tests pass
+- [X] T010 [US1] Implement isOverdue utility function in packages/frontend/src/utils/dateUtils.js
+- [X] T011 [US1] Add CSS styles for .todo-overdue class in packages/frontend/src/styles/theme.css
+- [X] T012 [US1] Update TodoCard component to apply overdue class in packages/frontend/src/components/TodoCard.js
+- [X] T013 [US1] Run tests and verify all User Story 1 tests pass
 
 **Acceptance Criteria**:
 - ✅ Todo with past due date shows red background + ⚠️ icon
@@ -82,17 +82,17 @@
 
 ### Tests for User Story 2
 
-- [ ] T014 [P] [US2] Write backend tests for completion timestamp logic in packages/backend/__tests__/app.test.js
-- [ ] T015 [P] [US2] Write unit tests for isCompletedLate function in packages/frontend/src/utils/__tests__/dateUtils.test.js
-- [ ] T016 [P] [US2] Write component tests for completed-late class in packages/frontend/src/components/__tests__/TodoCard.test.js
+- [X] T014 [P] [US2] Write backend tests for completion timestamp logic in packages/backend/__tests__/app.test.js
+- [X] T015 [P] [US2] Write unit tests for isCompletedLate function in packages/frontend/src/utils/__tests__/dateUtils.test.js
+- [X] T016 [P] [US2] Write component tests for completed-late class in packages/frontend/src/components/__tests__/TodoCard.test.js
 
 ### Implementation for User Story 2
 
-- [ ] T017 [US2] Implement completion timestamp logic in backend PUT /api/todos/:id endpoint in packages/backend/src/app.js
-- [ ] T018 [US2] Implement isCompletedLate utility function in packages/frontend/src/utils/dateUtils.js
-- [ ] T019 [US2] Add CSS styles for .todo-completed-late class in packages/frontend/src/styles/theme.css
-- [ ] T020 [US2] Update TodoCard component to apply completed-late class in packages/frontend/src/components/TodoCard.js
-- [ ] T021 [US2] Run tests and verify all User Story 2 tests pass
+- [X] T017 [US2] Implement completion timestamp logic in backend PUT /api/todos/:id endpoint in packages/backend/src/app.js
+- [X] T018 [US2] Implement isCompletedLate utility function in packages/frontend/src/utils/dateUtils.js
+- [X] T019 [US2] Add CSS styles for .todo-completed-late class in packages/frontend/src/styles/theme.css
+- [X] T020 [US2] Update TodoCard component to apply completed-late class in packages/frontend/src/components/TodoCard.js
+- [X] T021 [US2] Run tests and verify all User Story 2 tests pass
 
 **Acceptance Criteria**:
 - ✅ Completing an overdue todo stores completedAt timestamp in database
@@ -113,14 +113,14 @@
 
 ### Tests for User Story 3
 
-- [ ] T022 [P] [US3] Write component tests for overdue count in packages/frontend/src/components/__tests__/TodoList.test.js
+- [X] T022 [P] [US3] Write component tests for overdue count in packages/frontend/src/components/__tests__/TodoList.test.js
 
 ### Implementation for User Story 3
 
-- [ ] T023 [US3] Add overdueCount calculation using useMemo in packages/frontend/src/components/TodoList.js
-- [ ] T024 [US3] Add overdue summary display at top of TodoList in packages/frontend/src/components/TodoList.js
-- [ ] T025 [US3] Add CSS styles for .overdue-summary class in packages/frontend/src/styles/theme.css
-- [ ] T026 [US3] Run tests and verify all User Story 3 tests pass
+- [X] T023 [US3] Add overdueCount calculation using useMemo in packages/frontend/src/components/TodoList.js
+- [X] T024 [US3] Add overdue summary display at top of TodoList in packages/frontend/src/components/TodoList.js
+- [X] T025 [US3] Add CSS styles for .overdue-summary class in packages/frontend/src/styles/theme.css
+- [X] T026 [US3] Run tests and verify all User Story 3 tests pass
 
 **Acceptance Criteria**:
 - ✅ Count shows "X overdue tasks" at top of todo list when X > 0
@@ -136,12 +136,12 @@
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T027 [P] Add dark mode styles for overdue indicators in packages/frontend/src/styles/theme.css
-- [ ] T028 [P] Verify WCAG AA accessibility compliance for color contrast
-- [ ] T029 Run full test suite and verify 80%+ coverage across all packages
-- [ ] T030 Run ESLint and fix any violations
-- [ ] T031 Manual testing using quickstart.md validation scenarios
-- [ ] T032 [P] Update README.md with overdue feature documentation
+- [X] T027 [P] Add dark mode styles for overdue indicators in packages/frontend/src/styles/theme.css
+- [X] T028 [P] Verify WCAG AA accessibility compliance for color contrast
+- [X] T029 Run full test suite and verify 80%+ coverage across all packages
+- [X] T030 Run ESLint and fix any violations
+- [X] T031 Manual testing using quickstart.md validation scenarios
+- [X] T032 [P] Update README.md with overdue feature documentation
 
 ---
 

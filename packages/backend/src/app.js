@@ -21,7 +21,8 @@ db.exec(`
     title TEXT NOT NULL,
     dueDate TEXT,
     completed BOOLEAN DEFAULT 0,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    completedAt TEXT
   )
 `);
 
@@ -145,8 +146,36 @@ app.patch('/api/todos/:id/toggle', (req, res) => {
     }
 
     const newCompleted = existingTodo.completed ? 0 : 1;
-    const stmt = db.prepare('UPDATE todos SET completed = ? WHERE id = ?');
-    stmt.run(newCompleted, id);
+    
+    // Determine if we should set completedAt timestamp
+    let completedAt = existingTodo.completedAt; // Preserve existing timestamp
+    
+    if (newCompleted === 1) {
+      // Completing the todo
+      if (existingTodo.dueDate) {
+        // Check if the todo is overdue
+        const dueDate = new Date(existingTodo.dueDate);
+        dueDate.setHours(0, 0, 0, 0);
+        
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        if (dueDate < today) {
+          // Overdue - set completedAt timestamp
+          completedAt = new Date().toISOString();
+        } else {
+          // On time - leave completedAt as null
+          completedAt = null;
+        }
+      } else {
+        // No due date - leave completedAt as null
+        completedAt = null;
+      }
+    }
+    // If uncompleting (newCompleted === 0), preserve the existing completedAt
+    
+    const stmt = db.prepare('UPDATE todos SET completed = ?, completedAt = ? WHERE id = ?');
+    stmt.run(newCompleted, completedAt, id);
 
     const updatedTodo = db.prepare('SELECT * FROM todos WHERE id = ?').get(id);
     res.json(updatedTodo);
